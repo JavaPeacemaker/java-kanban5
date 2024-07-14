@@ -1,50 +1,27 @@
 package model;
 
 import java.util.ArrayList;
-import java.util.Objects;
+import java.util.List;
 
 public class Epic extends Task {
-    private final ArrayList<Integer> subtaskIds = new ArrayList<>();
+    private final List<Integer> subTasksIds = new ArrayList<>();
 
-    public Epic() {
-
-    }
-    public ArrayList<Integer> getSubtaskIds() {
-        return subtaskIds;
+    public Epic(String name, String description) {
+        super(name, description, TaskStatus.NEW);
     }
 
-    public void setSubtaskIds(int id) {
-        subtaskIds.add(id);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        if (!super.equals(o)) {
-            return false;
-        }
-        Epic epic = (Epic) o;
-        return Objects.equals(subtaskIds, epic.subtaskIds);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(super.hashCode(), subtaskIds);
+    public List<Integer> getSubTasksIds() {
+        return subTasksIds;
     }
 
     @Override
     public String toString() {
         return "Epic{" +
-                "subtaskIds=" + subtaskIds +
-                ", description='" + getDescription() + '\'' +
-                ", id=" + getId() +
-                ", name='" + getName() + '\'' +
-                ", status=" + getStatus() +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", taskStatus=" + taskStatus +
+                ", subTasksCount=" + subTasksIds.size() +
                 '}';
     }
 }
