@@ -1,17 +1,17 @@
 package service;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import service.Managers;
 
-class ManagersTest {
-
-    @Test
-    void shouldCreateDefaultManager() {
-        assertNotNull(Managers.getDefault());
-    }
+@DisplayName("Менеджеры")
+public class ManagersTest {
 
     @Test
-    void shouldCreateDefaultHistoryManager() {
-        assertNotNull(Managers.getDefaultHistory());
+    @DisplayName("Программа должна корректно собираться")
+    public void shouldCorrectlyAssembleProgramm() {
+        Assertions.assertNotNull(Managers.getDefault());
+        Assertions.assertNotNull(Managers.getDefaultHistory());
     }
 }

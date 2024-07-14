@@ -1,55 +1,63 @@
 package service;
 
 import model.Epic;
-import model.SubTask;
+import model.Subtask;
 import model.Task;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public interface TaskManager {
-    Task create(Task task);
-
-    Epic createEpic(Epic epic);
-
-    SubTask createSubTask(SubTask subTask);
-
-    Task get(int id);
-
-    Epic getEpic(int id);
-
-    SubTask getSubTask(int id);
-
-    Task update(Task task);
-
-    Epic updateEpic(Epic epic);
-
-    SubTask updateSubTask(SubTask subTask);
-
-    Task delete(int id);
-
-    Epic deleteEpic(int id);
-
-    SubTask deleteSubTask(int id);
 
     List<Task> getTasks();
 
     List<Epic> getEpics();
 
-    List<SubTask> getSubtasks();
+    List<Subtask> getSubtasks();
 
-    List<SubTask> getEpicSubtasks(int id);
+    void deleteAllTasks();
 
-    void clearTasks();
+    void deleteAllEpics();
 
-    void clearEpics();
+    void deleteAllSubtasks();
 
-    void clearSubTasks();
+    void deleteTaskById(int id);
 
-    void removeSubTaskFromEpic(Epic epic, Integer subTaskId);
+    void deleteEpicById(int id);
 
-    void removeAllSubtasksFromEpic(Epic epic);
+    void deleteSubtaskById(int id);
 
-    SubTask addSubTaskToEpic(Epic epic, SubTask subTask);
+    void updateTask(Task task);
+
+    void updateEpic(Epic epic);
+
+    void updateStatusEpic(Epic epic);
+
+    Subtask updateSubtask(Subtask subtask);
+
+    int createTask(Task task);
+
+    int createEpic(Epic epic);
+
+    int createSubtask(Subtask subtask);
 
     List<Task> getHistory();
+
+    void remove(int id);
+
+    ArrayList<Subtask> getEpicSubtasks(int epicId);
+
+    public List<Epic> getAllEpics();
+
+    public List<Task> getAllTasks();
+
+    public List<Subtask> getAllSubtasks();
+
+    public Task getTaskById(int id);
+
+    public Epic getEpicById(int id);
+
+    public Subtask getSubtaskById(int id);
+
+
 }

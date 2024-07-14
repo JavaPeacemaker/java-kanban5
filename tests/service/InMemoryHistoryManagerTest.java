@@ -1,39 +1,47 @@
 package service;
 
-import model.Epic;
-import model.SubTask;
-import model.Task;
-import model.TaskStatus;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
+
+
+import model.Task;
+import service.HistoryManager;
+import service.Managers;
+
 
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class InMemoryHistoryManagerTest {
+public class InMemoryHistoryManagerTest {
 
-    private static InMemoryHistoryManager historyManager;
-    private static Task task;
+    @Test
+    void newHistoryManager() {
+        HistoryManager historyManager = Managers.getDefaultHistory();
 
-    @BeforeEach
-    void beforeEach() {
-        historyManager = new InMemoryHistoryManager();
-        task = new Task("Task", "Description", TaskStatus.NEW);
+        assertNotNull(historyManager, "Менеджер не проинициализирован");
     }
     @Test
-    void shouldAddAnyTasksInHistory() {
-        Epic epic = new Epic("Epic", "Description");
-        SubTask subTask = new SubTask(epic, "SubTask", "Description", TaskStatus.NEW);
+    void checkSizeOfRequestHistory() {
+        HistoryManager historyManager = Managers.getDefaultHistory();
+        Task task = new Task();
+        final int sizeFromRequestHistoryShouldBe = 1;
+        final int sizeForCheckRequestSize = 10;
+        for (int i = 0; i <= sizeForCheckRequestSize; i++) {
+            historyManager.add(task);
+        }
+        List<Task> exampleOfRequestHistoryList = historyManager.getHistory();
 
-        historyManager.add(task);
-        historyManager.add(epic);
-        historyManager.add(subTask);
-
-        List<Task> history = historyManager.getHistory();
-
-        assertNotNull(history);
-        assertEquals(history.size(), 3);
+        assertEquals(sizeFromRequestHistoryShouldBe, exampleOfRequestHistoryList.size(), "Ограничение листа "
+                + "не работает");
     }
-
+    @Test
+    void add() {
+        HistoryManager historyManager = Managers.getDefaultHistory();
+        Task task = new Task();
+        historyManager.add(task);
+        final List<Task> history = historyManager.getHistory();
+        assertNotNull(history, "История не пустая.");
+        assertEquals(1, history.size(), "История не пустая.");
+    }
 }
